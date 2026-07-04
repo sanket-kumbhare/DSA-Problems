@@ -1,0 +1,33 @@
+/**
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+var isTrionic = function(nums) {
+    let p = 1;
+    if (nums[p-1] >= nums[p]) {
+        return false;
+    }
+    for (let i = 1; i < nums.length; i++) {
+        if (nums[i-1] >= nums[i]) {
+            break
+        }
+        p = i;
+    }
+    // console.log(p, nums[p])
+    let q = p + 1;
+    if (nums[q-1] <= nums[q] || !nums[p + 1]) { return false; }
+    for (let i = p+1; i < nums.length; i++) {
+        if (nums[i-1] <= nums[i]) {
+            break;
+        }
+        q = i;
+    }
+    // console.log(q, nums[q])
+    if (nums[q] >= nums[q + 1] || !nums[q + 1]) return false;
+    for (let i = q+1; i < nums.length; i++) {
+        if (nums[i-1] >= nums[i]) {
+            return false;
+        }
+    }
+    return true;
+};
